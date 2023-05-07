@@ -1,0 +1,46 @@
+public class Program
+{
+    const string InputMesage = "Please enter a password:";
+    const string AccessGrantedMessage = "Access Granted";
+    const string AccountIsblockedMessage = "Account is blocked";
+
+    const string CorrectPassword = "c#rulezzz";
+
+    const int FailLimitation = 3;
+
+    public static void Main(string[] args)
+    {
+        var hasAuth = Authorize();
+
+        DisplayAuthStatus(hasAuth);
+
+        _ = Console.ReadKey();
+    }
+
+    public static bool Authorize()
+    {
+        var attempt = 0;
+        do
+        {
+            Console.WriteLine(InputMesage);
+            var password = Console.ReadLine();
+            if (password == CorrectPassword)
+                return true;
+
+            attempt++;
+        } while (attempt != FailLimitation);
+
+        return false;
+    }
+
+    private static void DisplayAuthStatus(bool hasAuth)
+    {
+        if (!hasAuth)
+        {
+            Console.WriteLine(AccountIsblockedMessage);
+            return;
+        }
+
+        Console.WriteLine(AccessGrantedMessage);
+    }
+}
